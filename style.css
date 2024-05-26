@@ -1,0 +1,165 @@
+body{
+    background-color: rgb(24, 73, 24);
+    font-family: "Jaro", sans-serif;
+}
+header{
+    padding: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.principal{
+    background-image: url(https://miro.medium.com/v2/resize:fit:1400/1*eBZfXMuE72uCDtjUZEzZHQ.gif) ;
+    background-size: cover;
+    background-position: center;
+    height: 85vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+.icon{
+    max-width: 90px;
+    cursor: pointer;
+    
+}
+.icon:hover{
+    transform: scale(1.2);
+}
+.menu{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    font-weight: bold;
+    font-size: 24px;
+    padding: 30px;
+    padding-left: 200px;
+}
+.menu a{
+    cursor:pointer;
+    text-decoration: none;
+    color: rgb(184, 184, 184);
+}
+.menu a:hover{
+    transform: scale(1.2);
+    color:white;
+
+}
+.curriculo{
+   background-color: black;
+  padding: 10px 20px;
+  font-size: 29px;
+  color: rgb(184, 184, 184);
+  text-decoration: none;
+  border-radius: 20px;
+  transition: 0.2s ease-in-out;
+}
+.curriculo:hover{
+    transform: scale(1.2);
+    color:white
+}   
+li{
+    transition: 0.2s ease-in-out;
+
+}
+li:hover{
+    transform: scale(1.2);
+
+}
+.perfil{
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 30px;
+  border-radius: 0px 0px 100px 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 30px;
+}
+.perfil img{
+    max-width: 400px;
+    border-radius: 50%;
+    border: 5px solid white;
+    box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.4);
+}
+.perfilNome{
+    font-size: 60px;
+    color:white
+}
+.perfilProfissao{
+    color: green;
+    font-size: 30px;
+}
+.sobre {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 150px;
+    max-width: 80vw;
+    margin: 0 auto;
+    margin-top: 100px;
+    border-top: 10px solid #000000;
+    padding-top: 50px;
+  }
+.sobreInfo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 30px;
+    padding: 20px;
+}
+.sobreTitulo{
+    font-size: 50px;
+    font-weight: bold;
+    position: relative; 
+}
+.sobreInfo p{
+    font-size: 28px;
+    line-height: 1.5;
+}
+.cursos{
+    display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 100px;
+  max-width: 80vw;
+  margin: 0 auto;
+  border-top: 10px solid #000000;
+  padding-top: 50px;
+}   
+.tituloCursos{
+    max-width: 500px;
+    word-wrap: break-word;
+    font-size: 140px;
+    line-height: 1.5;
+}
+.gradeCursos{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+}
+.curso {
+    max-width: 600px;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 30px;
+    padding: 40px;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .cursoTitulo{
+    font-size: 27px;
+  }
+  .cursoNome{
+    color:white ;
+  }
+.cursoTexto{
+    color: black;
+}
+.cursoTempo{
+    color: white;
+}
