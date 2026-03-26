@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find c:UsersErichDownloadsportifoliosrcappapi -type f -name *.ts -o -name *.tsx -o -name *.js)",
+      "Bash(find /c/Users/Erich/Downloads/portifolio/src /c/Users/Erich/Downloads/portifolio/prisma /c/Users/Erich/Downloads/portifolio -maxdepth 1 -type f \\\\\\(-name *.json -o -name *.ts -o -name *.js -o -name *.css -o -name *.md \\\\\\))",
+      "Bash(find c:UsersErichDownloadsportifoliosrcappapi -name *.ts -type f)",
+      "Bash(npm install:*)",
+      "Bash(node -e \"const l = require\\(''lucide-react''\\); console.log\\(Object.keys\\(l\\).filter\\(k => k.toLowerCase\\(\\).includes\\(''github''\\)\\).join\\('', ''\\)\\)\")",
+      "Bash(node -e \"import\\(''lucide-react''\\).then\\(l => console.log\\(Object.keys\\(l\\).filter\\(k => k.toLowerCase\\(\\).includes\\(''git''\\)\\).join\\('', ''\\)\\)\\)\")",
+      "Bash(npx next:*)",
+      "Bash(node -e \"import\\(''lucide-react''\\).then\\(l => console.log\\(Object.keys\\(l\\).filter\\(k => k.toLowerCase\\(\\).includes\\(''link''\\)\\).slice\\(0,20\\).join\\('', ''\\)\\)\\)\")",
+      "Bash(npx prisma:*)",
+      "Bash(DATABASE_URL=\"postgresql://postgres:zEo267eYERODMgSF@db.dbaclzvfmtvzycdgozuq.supabase.co:5432/postgres\" npx prisma db seed)",
+      "Bash(node -e \":*)",
+      "Bash(DATABASE_URL=\"postgresql://postgres:zEo267eYERODMgSF@db.dbaclzvfmtvzycdgozuq.supabase.co:5432/postgres\" node -e \":*)",
+      "Bash(curl -s http://localhost:3000/api/projects?pageSize=100)"
+    ]
+  }
+}

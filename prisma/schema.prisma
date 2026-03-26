@@ -1,0 +1,79 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model User {
+  id    String     @id @default(cuid())
+  email String     @unique
+  name  String?
+  password String
+  role  Role       @default(VIEWER)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("users")
+}
+
+model Project {
+  id            String     @id @default(cuid())
+  title         String
+  slug          String     @unique
+  description   String
+  longDescription String?
+  coverImage    String?
+  images        String[]   @default([])
+  repositoryUrl String?
+  liveUrl       String?
+  status        ProjectStatus @default(IN_DEVELOPMENT)
+  featured      Boolean   @default(false)
+  published     Boolean   @default(true)
+  order         Int       @default(0)
+  viewsCount    Int       @default(0)
+  likesCount    Int       @default(0)
+  
+  technologies  Technology[] @relation("ProjectTechnology")
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("projects")
+  @@index([slug])
+  @@index([published])
+  @@index([featured])
+  @@index([order])
+}
+
+model Technology {
+  id        String     @id @default(cuid())
+  name      String     @unique
+  slug      String     @unique
+  color     String?    @default("#3B82F6")
+  icon      String?
+  
+  projects  Project[]  @relation("ProjectTechnology")
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("technologies")
+}
+
+enum Role {
+  ADMIN
+  VIEWER
+}
+
+enum ProjectStatus {
+  IN_DEVELOPMENT
+  IN_PRODUCTION
+  FINISHED
+}
