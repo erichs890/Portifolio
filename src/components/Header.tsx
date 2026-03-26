@@ -18,12 +18,6 @@ export async function Header() {
         </Link>
 
         <div className="flex items-center gap-6">
-          <Link
-            href="/"
-            className="text-slate-400 hover:text-slate-50 text-sm font-medium transition-colors hover:no-underline"
-          >
-            Projetos
-          </Link>
           {session?.user?.role === "ADMIN" && (
             <Link
               href="/admin"
