@@ -18,10 +18,9 @@ export function GlowCard({ children, className, delay = 0 }: GlowCardProps) {
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.5, delay, ease: "easeOut" }}
       className={clsx(
-        "relative rounded-xl border border-slate-700/50 bg-navy-800/80 overflow-hidden",
+        "relative rounded-lg border border-navy-700/50 bg-navy-800/80 overflow-hidden",
         "transition-all duration-300",
-        "hover:border-blue-500/30 hover:shadow-[0_0_30px_rgba(59,130,246,0.1)]",
-        "hover:scale-[1.02]",
+        "hover:border-accent-cyan/30 hover:shadow-[0_0_30px_rgba(100,255,218,0.07)]",
         className
       )}
     >

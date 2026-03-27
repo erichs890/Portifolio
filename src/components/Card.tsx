@@ -7,17 +7,13 @@ interface CardProps {
   hoverable?: boolean;
 }
 
-export function Card({
-  children,
-  className,
-  hoverable = false,
-}: CardProps) {
+export function Card({ children, className, hoverable = false }: CardProps) {
   return (
     <div
       className={clsx(
-        "rounded-xl bg-navy-800 border border-slate-700/50",
+        "rounded-lg bg-navy-800 border border-navy-700/50",
         hoverable &&
-          "hover:border-blue-500/30 hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] hover:scale-[1.01] transition-all duration-300 cursor-pointer",
+          "hover:border-accent-cyan/30 hover:shadow-[0_0_30px_rgba(100,255,218,0.07)] hover:scale-[1.01] transition-all duration-300 cursor-pointer",
         className
       )}
     >
@@ -34,12 +30,8 @@ interface CardImageProps {
 
 export function CardImage({ src, alt, className }: CardImageProps) {
   return (
-    <div className="relative overflow-hidden rounded-t-xl">
-      <img
-        src={src}
-        alt={alt}
-        className={clsx("w-full object-contain", className)}
-      />
+    <div className="relative overflow-hidden rounded-t-lg">
+      <img src={src} alt={alt} className={clsx("w-full object-contain", className)} />
       <div className="absolute inset-0 bg-gradient-to-t from-navy-800/60 to-transparent pointer-events-none" />
     </div>
   );
@@ -61,12 +53,7 @@ interface CardFooterProps {
 
 export function CardFooter({ children, className }: CardFooterProps) {
   return (
-    <div
-      className={clsx(
-        "px-5 py-3 border-t border-slate-700/50 flex gap-2",
-        className
-      )}
-    >
+    <div className={clsx("px-5 py-3 border-t border-navy-700/50 flex gap-2", className)}>
       {children}
     </div>
   );

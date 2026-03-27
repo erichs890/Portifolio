@@ -3,10 +3,11 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Star } from "lucide-react";
+import { Star, ExternalLink, Code2 } from "lucide-react";
 import { ProjectDTO } from "@/types";
 import { TechBadge, SparklineChart, LoadingSpinner } from "@/components";
 import { formatDate } from "@/utils/helpers";
+import { useI18n } from "@/lib/i18n";
 
 function generateSparklineData(viewsCount: number): number[] {
   const points = 12;
@@ -18,10 +19,10 @@ function generateSparklineData(viewsCount: number): number[] {
   });
 }
 
-const statusConfig: Record<string, { label: string; color: string }> = {
-  IN_DEVELOPMENT: { label: "Em Desenvolvimento", color: "#F59E0B" },
-  IN_PRODUCTION: { label: "Em Produção", color: "#10B981" },
-  FINISHED: { label: "Finalizado", color: "#8B5CF6" },
+const statusKeys: Record<string, { key: "statusInDev" | "statusInProd" | "statusFinished"; color: string }> = {
+  IN_DEVELOPMENT: { key: "statusInDev", color: "#F59E0B" },
+  IN_PRODUCTION: { key: "statusInProd", color: "#10B981" },
+  FINISHED: { key: "statusFinished", color: "#64ffda" },
 };
 
 export function ProjectGrid() {
@@ -48,12 +49,14 @@ export function ProjectGrid() {
     }
   }
 
+  const { t } = useI18n();
+
   if (isLoading) return <LoadingSpinner />;
 
   if (error) {
     return (
       <div className="text-center py-12">
-        <p className="text-rose-400">Erro: {error}</p>
+        <p className="text-rose-400 font-mono text-sm">Error: {error}</p>
       </div>
     );
   }
@@ -61,7 +64,7 @@ export function ProjectGrid() {
   if (projects.length === 0) {
     return (
       <div className="text-center py-12">
-        <p className="text-slate-400">Nenhum projeto disponível no momento.</p>
+        <p className="text-text-secondary">{t("noProjects")}</p>
       </div>
     );
   }
@@ -69,7 +72,8 @@ export function ProjectGrid() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
       {projects.map((project, index) => {
-        const status = statusConfig[project.status] || statusConfig.FINISHED;
+        const statusInfo = statusKeys[project.status] || statusKeys.FINISHED;
+        const status = { label: t(statusInfo.key), color: statusInfo.color };
         const sparkData = generateSparklineData(project.viewsCount);
 
         return (
@@ -81,7 +85,7 @@ export function ProjectGrid() {
             transition={{ duration: 0.4, delay: index * 0.08 }}
           >
             <Link href={`/projects/${project.slug}`} className="block hover:no-underline">
-              <div className="group rounded-xl border border-slate-700/50 bg-navy-800/80 overflow-hidden transition-all duration-300 hover:border-blue-500/30 hover:shadow-[0_0_30px_rgba(59,130,246,0.1)] hover:scale-[1.01]">
+              <div className="group rounded-lg border border-navy-700/50 bg-navy-800/80 overflow-hidden transition-all duration-300 hover:border-accent-cyan/30 hover:shadow-[0_0_30px_rgba(100,255,218,0.07)]">
                 {/* Cover Image */}
                 {project.coverImage && (
                   <div className="relative overflow-hidden">
@@ -97,64 +101,77 @@ export function ProjectGrid() {
                 {/* Body */}
                 <div className="p-5">
                   {/* Status & Role */}
-                  <div className="flex items-center gap-3 mb-2">
+                  <div className="flex items-center gap-3 mb-3">
                     <div className="flex items-center gap-1.5">
                       <span
                         className="w-1.5 h-1.5 rounded-full"
                         style={{ backgroundColor: status.color }}
                       />
-                      <span className="text-xs font-medium" style={{ color: status.color }}>
+                      <span className="text-xs font-mono" style={{ color: status.color }}>
                         {status.label}
                       </span>
                     </div>
+                    {project.projectRole === "CO_CREATOR" && (
+                      <span className="text-xs font-mono px-1.5 py-0.5 rounded bg-violet-500/10 text-violet-400 border border-violet-500/20">
+                        {t("coCreator")}
+                      </span>
+                    )}
                     {project.projectRole === "COLLABORATOR" && (
-                      <span className="text-xs px-1.5 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20">
-                        Colaborador
+                      <span className="text-xs font-mono px-1.5 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20">
+                        {t("collaborator")}
                       </span>
                     )}
                   </div>
 
-                  {/* Title & Description */}
-                  <h3 className="text-lg font-semibold text-slate-50 mb-1 group-hover:text-blue-400 transition-colors">
+                  {/* Title */}
+                  <h3 className="text-lg font-semibold text-text-heading mb-2 group-hover:text-accent-cyan transition-colors">
                     {project.title}
                   </h3>
-                  <p className="text-sm text-slate-400 line-clamp-2 mb-4">
+
+                  {/* Description */}
+                  <p className="text-sm text-text-secondary line-clamp-2 mb-4">
                     {project.description}
                   </p>
 
-                  {/* Metrics Row */}
+                  {/* Sparkline */}
+                  <div className="mb-4 opacity-40 group-hover:opacity-80 transition-opacity">
+                    <SparklineChart data={sparkData} color={status.color} height={24} />
+                  </div>
+
+                  {/* Featured */}
                   {project.featured && (
-                    <div className="flex items-center gap-1 text-amber-400 text-xs mb-3">
-                      <Star size={13} fill="currentColor" />
-                      <span>Destaque</span>
+                    <div className="flex items-center gap-1 text-accent-cyan text-xs font-mono mb-3">
+                      <Star size={12} fill="currentColor" />
+                      <span>{t("featured")}</span>
                     </div>
                   )}
-
-                  {/* Sparkline */}
-                  <div className="mb-4 opacity-60 group-hover:opacity-100 transition-opacity">
-                    <SparklineChart data={sparkData} color={status.color} height={28} />
-                  </div>
 
                   {/* Technologies */}
                   <div className="flex flex-wrap gap-1.5 mb-3">
                     {project.technologies.slice(0, 3).map((tech) => (
-                      <TechBadge
-                        key={tech.id}
-                        name={tech.name}
-                        color={tech.color}
-                      />
+                      <TechBadge key={tech.id} name={tech.name} color={tech.color} />
                     ))}
                     {project.technologies.length > 3 && (
-                      <span className="inline-flex items-center px-2 py-1 rounded-md text-xs text-slate-500 bg-slate-800/50 border border-slate-700/30">
+                      <span className="inline-flex items-center px-2 py-1 rounded text-xs font-mono text-text-secondary bg-navy-900/50 border border-navy-700/30">
                         +{project.technologies.length - 3}
                       </span>
                     )}
                   </div>
 
-                  {/* Date */}
-                  <p className="text-xs text-slate-600">
-                    {formatDate(project.createdAt)}
-                  </p>
+                  {/* Footer: Date + Links */}
+                  <div className="flex items-center justify-between pt-3 border-t border-navy-700/30">
+                    <span className="text-xs font-mono text-text-muted">
+                      {formatDate(project.createdAt)}
+                    </span>
+                    <div className="flex items-center gap-2">
+                      {project.repositoryUrl && (
+                        <Code2 size={14} className="text-text-secondary hover:text-accent-cyan transition-colors" />
+                      )}
+                      {project.liveUrl && (
+                        <ExternalLink size={14} className="text-text-secondary hover:text-accent-cyan transition-colors" />
+                      )}
+                    </div>
+                  </div>
                 </div>
               </div>
             </Link>

@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 export const dynamic = "force-dynamic";
 
 export default async function Home() {
-  let stats = { totalProjects: 0, totalFinished: 0, inDevelopment: 0 };
+  let stats = { totalProjects: 0, totalFinished: 0, inDevelopment: 0, inProduction: 0 };
 
   try {
     const result = await projectService.getAllProjects(1, 100);
@@ -23,6 +23,7 @@ export default async function Home() {
       totalProjects: projects.length,
       totalFinished: projects.filter((p) => p.status === "FINISHED").length,
       inDevelopment: projects.filter((p) => p.status === "IN_DEVELOPMENT").length,
+      inProduction: projects.filter((p) => p.status === "IN_PRODUCTION").length,
     };
   } catch {
     // Stats will remain at 0

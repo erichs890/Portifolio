@@ -1,107 +1,86 @@
 "use client";
 
 import { motion } from "framer-motion";
-import {
-  Monitor,
-  Server,
-  BarChart3,
-  Database,
-  Code2,
-} from "lucide-react";
 import { SectionHeader } from "@/components";
+import { useI18n } from "@/lib/i18n";
 
-const skills = [
+const categories = [
   {
-    icon: Code2,
-    title: "Desenvolvimento de Software",
-    description:
-      "Desenvolvimento de soluções completas com Python, da automação à construção de sistemas robustos.",
-    color: "#F43F5E",
-    techs: ["Python"],
+    title: "Core Dev",
+    color: "#64ffda",
+    techs: ["Python", "JavaScript", "TypeScript", "HTML", "CSS"],
   },
   {
-    icon: Monitor,
     title: "Frontend",
-    description:
-      "Interfaces responsivas com foco em performance e experiência do usuário, da web ao mobile.",
-    color: "#3B82F6",
-    techs: ["HTML", "CSS", "JavaScript", "React", "React Native"],
+    color: "#60a5fa",
+    techs: ["React", "React Native", "Next.js", "Tailwind CSS"],
   },
   {
-    icon: Server,
-    title: "Backend",
-    description:
-      "APIs REST, autenticação, middlewares e arquitetura escalável.",
+    title: "Backend & APIs",
     color: "#10B981",
-    techs: ["Node.js"],
+    techs: ["Node.js", "REST APIs", "Prisma ORM"],
   },
   {
-    icon: Database,
-    title: "Banco de Dados",
-    description:
-      "Modelagem relacional, queries otimizadas e backend-as-a-service.",
+    title: "Database / Supabase",
     color: "#8B5CF6",
-    techs: ["SQL", "Supabase"],
+    techs: ["PostgreSQL", "SQL", "Supabase", "Row Level Security"],
   },
   {
-    icon: BarChart3,
-    title: "Análise de Dados",
-    description:
-      "Manipulação, limpeza e análise de dados para geração de insights e tomada de decisão.",
+    title: "Data & Analytics",
     color: "#F59E0B",
-    techs: ["Pandas"],
+    techs: ["Pandas", "Data Viz", "ETL", "KPIs & Reports"],
+  },
+  {
+    title: "DevOps & Tools",
+    color: "#F43F5E",
+    techs: ["Git", "Vercel", "Docker", "CI/CD"],
   },
 ];
 
 export function SkillsSection() {
+  const { t } = useI18n();
+
   return (
     <>
       <SectionHeader
-        title="Expertise"
-        subtitle="Áreas de especialização com foco em soluções completas e orientadas a dados."
+        title={t("sectionTechStack")}
+        subtitle={t("sectionTechStackSub")}
       />
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {skills.map((skill, index) => {
-          const Icon = skill.icon;
-          return (
-            <motion.div
-              key={skill.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="group rounded-xl border border-slate-700/50 bg-navy-800/50 p-6 transition-all duration-300 hover:border-blue-500/20 hover:bg-navy-800"
-            >
-              <div className="flex items-start gap-4">
-                <div
-                  className="p-3 rounded-lg flex-shrink-0"
-                  style={{ backgroundColor: `${skill.color}10` }}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {categories.map((cat, index) => (
+          <motion.div
+            key={cat.title}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.4, delay: index * 0.08 }}
+            className="rounded-lg border border-navy-700/50 bg-navy-800/50 p-5 transition-all duration-300 hover:border-accent-cyan/20 hover:bg-navy-800"
+          >
+            <div className="flex items-center gap-2 mb-4">
+              <span
+                className="w-2 h-2 rounded-full"
+                style={{ backgroundColor: cat.color }}
+              />
+              <h3
+                className="text-sm font-semibold font-mono uppercase tracking-wider"
+                style={{ color: cat.color }}
+              >
+                {cat.title}
+              </h3>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              {cat.techs.map((tech) => (
+                <span
+                  key={tech}
+                  className="text-xs font-mono px-2.5 py-1 rounded bg-navy-900/80 text-text-primary border border-navy-700/50 hover:border-accent-cyan/30 transition-colors"
                 >
-                  <Icon size={22} style={{ color: skill.color }} />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <h3 className="text-lg font-semibold text-slate-50 mb-1">
-                    {skill.title}
-                  </h3>
-                  <p className="text-sm text-slate-400 mb-3">
-                    {skill.description}
-                  </p>
-                  <div className="flex flex-wrap gap-1.5">
-                    {skill.techs.map((tech) => (
-                      <span
-                        key={tech}
-                        className="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-400 border border-slate-700/50"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          );
-        })}
+                  {tech}
+                </span>
+              ))}
+            </div>
+          </motion.div>
+        ))}
       </div>
     </>
   );

@@ -5,25 +5,22 @@ export async function Header() {
   const session = await auth();
 
   return (
-    <header className="sticky top-0 z-40 bg-navy-900/80 backdrop-blur-xl border-b border-slate-700/50">
+    <header className="sticky top-0 z-40 bg-navy-900/85 backdrop-blur-xl border-b border-navy-700/50">
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16">
         <Link
           href="/"
-          className="font-bold text-xl text-slate-50 hover:no-underline"
+          className="font-mono font-bold text-lg text-accent-cyan hover:no-underline hover:opacity-80 transition-opacity"
         >
-          <span className="text-gradient">Erich</span>
-          <span className="hidden sm:inline text-slate-400 font-normal text-sm ml-2">
-            Portfolio
-          </span>
+          {"<"}Erich{" />"}
         </Link>
 
         <div className="flex items-center gap-6">
           {session?.user?.role === "ADMIN" && (
             <Link
               href="/admin"
-              className="text-slate-400 hover:text-slate-50 text-sm font-medium transition-colors hover:no-underline"
+              className="text-text-secondary hover:text-accent-cyan text-sm font-mono transition-colors hover:no-underline"
             >
-              Admin
+              .admin()
             </Link>
           )}
         </div>

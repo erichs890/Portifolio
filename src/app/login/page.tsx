@@ -18,19 +18,9 @@ export default function LoginPage() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setIsLoading(true);
-
     try {
-      const result = await signIn("credentials", {
-        email,
-        password,
-        redirect: false,
-      });
-
-      if (result?.error) {
-        toast.error("Email ou senha inválidos");
-        return;
-      }
-
+      const result = await signIn("credentials", { email, password, redirect: false });
+      if (result?.error) { toast.error("Email ou senha inválidos"); return; }
       toast.success("Login realizado com sucesso!");
       router.push("/admin");
     } catch {
@@ -43,17 +33,15 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen flex items-center justify-center py-12 px-4">
       <div className="w-full max-w-md">
-        <div className="rounded-xl border border-slate-700/50 bg-navy-800 p-8">
+        <div className="rounded-lg border border-navy-700/50 bg-navy-800 p-8">
           <div className="flex justify-center mb-6">
-            <div className="p-3 rounded-lg bg-blue-500/10">
-              <Lock size={24} className="text-blue-400" />
+            <div className="p-3 rounded bg-accent-cyan/10">
+              <Lock size={24} className="text-accent-cyan" />
             </div>
           </div>
-
-          <h1 className="text-2xl font-bold text-center mb-8 text-slate-50">
+          <h1 className="text-xl font-bold text-center mb-8 text-text-heading font-mono">
             Acesso Restrito
           </h1>
-
           <form onSubmit={handleSubmit} className="space-y-6">
             <Input
               label="Email"
@@ -64,7 +52,6 @@ export default function LoginPage() {
               required
               containerClassName="space-y-2"
             />
-
             <Input
               label="Senha"
               type="password"
@@ -74,12 +61,7 @@ export default function LoginPage() {
               required
               containerClassName="space-y-2"
             />
-
-            <Button
-              type="submit"
-              isLoading={isLoading}
-              className="w-full"
-            >
+            <Button type="submit" isLoading={isLoading} className="w-full">
               Entrar
             </Button>
           </form>

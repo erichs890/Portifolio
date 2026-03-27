@@ -18,7 +18,7 @@ export const CreateProjectSchema = z.object({
   repositoryUrl: z.string().optional().or(z.literal("")),
   liveUrl: z.string().optional().or(z.literal("")),
   status: z.enum(["IN_DEVELOPMENT", "IN_PRODUCTION", "FINISHED"]).optional(),
-  projectRole: z.enum(["CREATOR", "COLLABORATOR"]).optional(),
+  projectRole: z.enum(["CREATOR", "CO_CREATOR", "COLLABORATOR"]).optional(),
   featured: z.boolean().optional(),
   published: z.boolean().optional(),
   technologies: z.array(z.string()).optional(),

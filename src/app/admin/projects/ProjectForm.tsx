@@ -280,6 +280,7 @@ export function ProjectForm({ project, isLoading: externalIsLoading }: ProjectFo
             onChange={(e) => setFormData({ ...formData, projectRole: e.target.value as any })}
             options={[
               { value: "CREATOR", label: "Criador" },
+              { value: "CO_CREATOR", label: "Co-Criador" },
               { value: "COLLABORATOR", label: "Colaborador" },
             ]}
             containerClassName="space-y-2"

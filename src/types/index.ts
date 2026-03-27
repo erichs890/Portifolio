@@ -2,7 +2,7 @@ export type Role = "ADMIN" | "VIEWER";
 
 export type ProjectStatus = "IN_DEVELOPMENT" | "IN_PRODUCTION" | "FINISHED";
 
-export type ProjectRole = "CREATOR" | "COLLABORATOR";
+export type ProjectRole = "CREATOR" | "CO_CREATOR" | "COLLABORATOR";
 
 export interface UserDTO {
   id: string;

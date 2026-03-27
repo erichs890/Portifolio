@@ -17,13 +17,14 @@ export function SectionHeader({ title, subtitle }: SectionHeaderProps) {
       className="mb-12"
     >
       <div className="flex items-center gap-4 mb-3">
-        <h2 className="text-3xl md:text-4xl font-bold text-slate-50">
+        <h2 className="text-2xl md:text-3xl font-bold text-text-heading">
+          <span className="text-accent-cyan font-mono font-normal text-xl mr-2">//</span>
           {title}
         </h2>
-        <div className="flex-1 h-px bg-gradient-to-r from-slate-700 to-transparent" />
+        <div className="flex-1 h-px bg-gradient-to-r from-navy-700 to-transparent" />
       </div>
       {subtitle && (
-        <p className="text-slate-400 text-lg max-w-2xl">{subtitle}</p>
+        <p className="text-text-secondary text-base max-w-2xl">{subtitle}</p>
       )}
     </motion.div>
   );
