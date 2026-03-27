@@ -2,6 +2,8 @@ export type Role = "ADMIN" | "VIEWER";
 
 export type ProjectStatus = "IN_DEVELOPMENT" | "IN_PRODUCTION" | "FINISHED";
 
+export type ProjectRole = "CREATOR" | "COLLABORATOR";
+
 export interface UserDTO {
   id: string;
   email: string;
@@ -39,6 +41,7 @@ export interface ProjectDTO {
   repositoryUrl: string | null;
   liveUrl: string | null;
   status: ProjectStatus;
+  projectRole: ProjectRole;
   featured: boolean;
   published: boolean;
   order: number;
@@ -58,6 +61,7 @@ export interface CreateProjectDTO {
   repositoryUrl?: string;
   liveUrl?: string;
   status?: ProjectStatus;
+  projectRole?: ProjectRole;
   featured?: boolean;
   published?: boolean;
   technologies?: string[]; // technology IDs
@@ -72,6 +76,7 @@ export interface UpdateProjectDTO {
   repositoryUrl?: string;
   liveUrl?: string;
   status?: ProjectStatus;
+  projectRole?: ProjectRole;
   featured?: boolean;
   published?: boolean;
   order?: number;

@@ -96,15 +96,22 @@ export function ProjectGrid() {
 
                 {/* Body */}
                 <div className="p-5">
-                  {/* Status */}
-                  <div className="flex items-center gap-2 mb-2">
-                    <span
-                      className="w-1.5 h-1.5 rounded-full"
-                      style={{ backgroundColor: status.color }}
-                    />
-                    <span className="text-xs font-medium" style={{ color: status.color }}>
-                      {status.label}
-                    </span>
+                  {/* Status & Role */}
+                  <div className="flex items-center gap-3 mb-2">
+                    <div className="flex items-center gap-1.5">
+                      <span
+                        className="w-1.5 h-1.5 rounded-full"
+                        style={{ backgroundColor: status.color }}
+                      />
+                      <span className="text-xs font-medium" style={{ color: status.color }}>
+                        {status.label}
+                      </span>
+                    </div>
+                    {project.projectRole === "COLLABORATOR" && (
+                      <span className="text-xs px-1.5 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20">
+                        Colaborador
+                      </span>
+                    )}
                   </div>
 
                   {/* Title & Description */}

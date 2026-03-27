@@ -34,6 +34,7 @@ model Project {
   repositoryUrl String?
   liveUrl       String?
   status        ProjectStatus @default(IN_DEVELOPMENT)
+  projectRole   ProjectRole   @default(CREATOR)
   featured      Boolean   @default(false)
   published     Boolean   @default(true)
   order         Int       @default(0)
@@ -76,4 +77,9 @@ enum ProjectStatus {
   IN_DEVELOPMENT
   IN_PRODUCTION
   FINISHED
+}
+
+enum ProjectRole {
+  CREATOR
+  COLLABORATOR
 }

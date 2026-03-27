@@ -31,6 +31,7 @@ export function ProjectForm({ project, isLoading: externalIsLoading }: ProjectFo
     repositoryUrl: project?.repositoryUrl || "",
     liveUrl: project?.liveUrl || "",
     status: project?.status || "IN_DEVELOPMENT",
+    projectRole: project?.projectRole || "CREATOR",
     featured: project?.featured || false,
     published: project?.published !== false,
     technologies: [],
@@ -269,6 +270,17 @@ export function ProjectForm({ project, isLoading: externalIsLoading }: ProjectFo
               { value: "IN_DEVELOPMENT", label: "Em Desenvolvimento" },
               { value: "IN_PRODUCTION", label: "Em Produção" },
               { value: "FINISHED", label: "Finalizado" },
+            ]}
+            containerClassName="space-y-2"
+          />
+
+          <Select
+            label="Papel no Projeto"
+            value={formData.projectRole}
+            onChange={(e) => setFormData({ ...formData, projectRole: e.target.value as any })}
+            options={[
+              { value: "CREATOR", label: "Criador" },
+              { value: "COLLABORATOR", label: "Colaborador" },
             ]}
             containerClassName="space-y-2"
           />

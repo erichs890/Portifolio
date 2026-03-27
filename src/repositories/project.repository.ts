@@ -59,6 +59,7 @@ export class ProjectRepository {
         repositoryUrl: data.repositoryUrl,
         liveUrl: data.liveUrl,
         status: data.status || "IN_DEVELOPMENT",
+        projectRole: data.projectRole || "CREATOR",
         featured: data.featured || false,
         published: data.published !== false,
         technologies: data.technologies
@@ -84,6 +85,7 @@ export class ProjectRepository {
         repositoryUrl: data.repositoryUrl,
         liveUrl: data.liveUrl,
         status: data.status,
+        projectRole: data.projectRole,
         featured: data.featured,
         published: data.published,
         order: data.order,

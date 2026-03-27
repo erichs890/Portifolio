@@ -21,7 +21,9 @@
       "Bash(ping -n 1 db.dbaclzvfmtvzycdgozuq.supabase.co)",
       "Bash(nslookup db.dbaclzvfmtvzycdgozuq.supabase.co 8.8.8.8)",
       "Bash(nslookup db.dbaclzvfmtvzycdgozuq.supabase.co 1.1.1.1)",
-      "Bash(nslookup aws-0-us-west-2.pooler.supabase.com 1.1.1.1)"
+      "Bash(nslookup aws-0-us-west-2.pooler.supabase.com 1.1.1.1)",
+      "Bash(timeout 30)",
+      "Bash(DATABASE_URL=\"postgresql://postgres.dbaclzvfmtvzycdgozuq:5N8RAKjEtVEsWfCa@aws-0-us-west-2.pooler.supabase.com:5432/postgres\" npx prisma db push --accept-data-loss)"
     ]
   }
 }
