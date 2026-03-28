@@ -1,8 +1,7 @@
 import { Metadata } from "next";
 import { HeroSection } from "./components/HeroSection";
-import { ProjectGrid } from "@/app/components/ProjectGrid";
 import { SkillsSection } from "./components/SkillsSection";
-import { SectionHeader } from "@/components";
+import { ProjectsSection } from "./components/ProjectsSection";
 import { projectService } from "@/services/project.service";
 
 export const metadata: Metadata = {
@@ -41,11 +40,7 @@ export default async function Home() {
 
       <section id="projects" className="py-20 md:py-28 border-t border-slate-800">
         <div className="container">
-          <SectionHeader
-            title="Projetos"
-            subtitle="Cada projeto é um sistema completo — do banco de dados à interface. Cards com métricas reais."
-          />
-          <ProjectGrid />
+          <ProjectsSection />
         </div>
       </section>
     </div>
