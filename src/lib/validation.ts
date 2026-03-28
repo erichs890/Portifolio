@@ -9,11 +9,14 @@ export type LoginInput = z.infer<typeof LoginSchema>;
 
 export const CreateProjectSchema = z.object({
   title: z.string().min(3, "Título deve ter no mínimo 3 caracteres").max(200),
+  titleEn: z.string().max(200).optional().or(z.literal("")),
   description: z
     .string()
     .min(10, "Descrição deve ter no mínimo 10 caracteres")
     .max(2000),
+  descriptionEn: z.string().max(2000).optional().or(z.literal("")),
   longDescription: z.string().max(5000).optional().or(z.literal("")),
+  longDescriptionEn: z.string().max(5000).optional().or(z.literal("")),
   coverImage: z.string().optional().or(z.literal("")),
   repositoryUrl: z.string().optional().or(z.literal("")),
   liveUrl: z.string().optional().or(z.literal("")),

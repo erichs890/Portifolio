@@ -33,9 +33,12 @@ export interface TechnologyInput {
 export interface ProjectDTO {
   id: string;
   title: string;
+  titleEn: string | null;
   slug: string;
   description: string;
+  descriptionEn: string | null;
   longDescription: string | null;
+  longDescriptionEn: string | null;
   coverImage: string | null;
   images: string[];
   repositoryUrl: string | null;
@@ -54,8 +57,11 @@ export interface ProjectDTO {
 
 export interface CreateProjectDTO {
   title: string;
+  titleEn?: string;
   description: string;
+  descriptionEn?: string;
   longDescription?: string;
+  longDescriptionEn?: string;
   coverImage?: string;
   images?: string[];
   repositoryUrl?: string;
@@ -69,8 +75,11 @@ export interface CreateProjectDTO {
 
 export interface UpdateProjectDTO {
   title?: string;
+  titleEn?: string;
   description?: string;
+  descriptionEn?: string;
   longDescription?: string;
+  longDescriptionEn?: string;
   coverImage?: string;
   images?: string[];
   repositoryUrl?: string;

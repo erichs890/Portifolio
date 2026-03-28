@@ -26,9 +26,12 @@ model User {
 model Project {
   id            String     @id @default(cuid())
   title         String
+  titleEn       String?
   slug          String     @unique
   description   String
+  descriptionEn String?
   longDescription String?
+  longDescriptionEn String?
   coverImage    String?
   images        String[]   @default([])
   repositoryUrl String?

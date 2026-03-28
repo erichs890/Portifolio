@@ -25,8 +25,11 @@ export function ProjectForm({ project, isLoading: externalIsLoading }: ProjectFo
 
   const [formData, setFormData] = useState<CreateProjectDTO>({
     title: project?.title || "",
+    titleEn: project?.titleEn || "",
     description: project?.description || "",
+    descriptionEn: project?.descriptionEn || "",
     longDescription: project?.longDescription || "",
+    longDescriptionEn: project?.longDescriptionEn || "",
     coverImage: project?.coverImage || "",
     repositoryUrl: project?.repositoryUrl || "",
     liveUrl: project?.liveUrl || "",
@@ -190,23 +193,44 @@ export function ProjectForm({ project, isLoading: externalIsLoading }: ProjectFo
         </h2>
         <div className="space-y-4">
           <Input
-            label="Título"
+            label="Título (PT)"
             value={formData.title}
             onChange={(e) => setFormData({ ...formData, title: e.target.value })}
             required
             containerClassName="space-y-2"
           />
+          <Input
+            label="Title (EN)"
+            value={formData.titleEn}
+            onChange={(e) => setFormData({ ...formData, titleEn: e.target.value })}
+            placeholder="English title (optional)"
+            containerClassName="space-y-2"
+          />
           <Textarea
-            label="Descrição Curta"
+            label="Descrição Curta (PT)"
             value={formData.description}
             onChange={(e) => setFormData({ ...formData, description: e.target.value })}
             required
             containerClassName="space-y-2"
           />
           <Textarea
-            label="Descrição Longa (Markdown)"
+            label="Short Description (EN)"
+            value={formData.descriptionEn}
+            onChange={(e) => setFormData({ ...formData, descriptionEn: e.target.value })}
+            placeholder="English description (optional)"
+            containerClassName="space-y-2"
+          />
+          <Textarea
+            label="Descrição Longa (PT - Markdown)"
             value={formData.longDescription}
             onChange={(e) => setFormData({ ...formData, longDescription: e.target.value })}
+            containerClassName="space-y-2"
+          />
+          <Textarea
+            label="Long Description (EN - Markdown)"
+            value={formData.longDescriptionEn}
+            onChange={(e) => setFormData({ ...formData, longDescriptionEn: e.target.value })}
+            placeholder="English long description (optional)"
             containerClassName="space-y-2"
           />
         </div>

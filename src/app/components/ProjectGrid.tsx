@@ -49,7 +49,7 @@ export function ProjectGrid() {
     }
   }
 
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
 
   if (isLoading) return <LoadingSpinner />;
 
@@ -125,12 +125,12 @@ export function ProjectGrid() {
 
                   {/* Title */}
                   <h3 className="text-lg font-semibold text-text-heading mb-2 group-hover:text-accent-cyan transition-colors">
-                    {project.title}
+                    {lang === "en" && project.titleEn ? project.titleEn : project.title}
                   </h3>
 
                   {/* Description */}
                   <p className="text-sm text-text-secondary line-clamp-2 mb-4">
-                    {project.description}
+                    {lang === "en" && project.descriptionEn ? project.descriptionEn : project.description}
                   </p>
 
                   {/* Sparkline */}

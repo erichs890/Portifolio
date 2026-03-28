@@ -52,9 +52,12 @@ export class ProjectRepository {
     const project = await prisma.project.create({
       data: {
         title: data.title,
+        titleEn: data.titleEn,
         slug,
         description: data.description,
+        descriptionEn: data.descriptionEn,
         longDescription: data.longDescription,
+        longDescriptionEn: data.longDescriptionEn,
         coverImage: data.coverImage,
         repositoryUrl: data.repositoryUrl,
         liveUrl: data.liveUrl,
@@ -79,8 +82,11 @@ export class ProjectRepository {
       where: { id },
       data: {
         title: data.title,
+        titleEn: data.titleEn,
         description: data.description,
+        descriptionEn: data.descriptionEn,
         longDescription: data.longDescription,
+        longDescriptionEn: data.longDescriptionEn,
         coverImage: data.coverImage,
         repositoryUrl: data.repositoryUrl,
         liveUrl: data.liveUrl,
