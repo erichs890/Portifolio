@@ -18,13 +18,13 @@ export function Button({
   ...props
 }: ButtonProps) {
   const baseStyles =
-    "font-medium rounded transition-all duration-200 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed";
+    "inline-flex items-center justify-center gap-2 font-medium rounded-xl transition-all duration-300 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed hover:-translate-y-0.5 active:translate-y-0";
 
   const variants = {
     primary:
-      "bg-transparent border border-accent-cyan text-accent-cyan hover:bg-accent-cyan/10 font-mono",
+      "bg-transparent border border-accent-cyan text-accent-cyan hover:bg-accent-cyan/10 hover:shadow-[0_8px_30px_-10px_var(--glow-cyan)] font-mono",
     secondary:
-      "bg-navy-800 hover:bg-navy-700 text-text-primary border border-navy-700",
+      "bg-navy-800/60 hover:bg-navy-700/60 text-text-primary border border-white/5 hover:border-white/15",
     danger:
       "bg-rose-600/10 hover:bg-rose-600/20 text-rose-400 border border-rose-500/20",
   };

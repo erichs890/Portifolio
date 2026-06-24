@@ -10,6 +10,7 @@ export function ProjectsSection() {
   return (
     <>
       <SectionHeader
+        index="02"
         title={t("sectionProjects")}
         subtitle={t("sectionProjectsSub")}
       />

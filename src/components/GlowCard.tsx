@@ -16,11 +16,11 @@ export function GlowCard({ children, className, delay = 0 }: GlowCardProps) {
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.5, delay, ease: "easeOut" }}
+      transition={{ duration: 0.5, delay, ease: [0.16, 1, 0.3, 1] }}
       className={clsx(
-        "relative rounded-lg border border-navy-700/50 bg-navy-800/80 overflow-hidden",
+        "relative rounded-2xl border border-white/5 bg-navy-800/70 overflow-hidden",
         "transition-all duration-300",
-        "hover:border-accent-cyan/30 hover:shadow-[0_0_30px_rgba(100,255,218,0.07)]",
+        "hover:border-accent-cyan/30 hover:-translate-y-1 hover:shadow-[0_18px_50px_-20px_rgba(0,0,0,0.7),0_0_40px_-12px_var(--glow-cyan)]",
         className
       )}
     >

@@ -30,9 +30,8 @@ export function ProjectDetailClient({ project }: { project: ProjectDTO }) {
 
   return (
     <div className="min-h-screen">
-      <section className="py-12 md:py-20 relative">
-        <div className="absolute inset-0 bg-grid-pattern opacity-20" />
-        <div className="absolute inset-0 bg-gradient-to-b from-navy-950 to-navy-950/95" />
+      <section className="pt-24 pb-12 md:pt-28 md:pb-16 relative">
+        <div className="absolute top-0 right-0 w-[30rem] h-[30rem] bg-accent-violet/10 rounded-full blur-[130px] -z-10" />
 
         <div className="container relative">
           <Link
@@ -44,13 +43,13 @@ export function ProjectDetailClient({ project }: { project: ProjectDTO }) {
           </Link>
 
           <div className="max-w-4xl">
-            <div className="flex items-center gap-3 mb-4">
+            <div className="flex items-center gap-2 mb-5 flex-wrap">
               <Badge variant={statusInfo.variant}>{t(statusInfo.key)}</Badge>
               {project.featured && <Badge variant="primary">{t("featured")}</Badge>}
               {roleKey && <Badge variant="warning">{t(roleKey)}</Badge>}
             </div>
 
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-text-heading">
+            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold mb-5 text-text-heading tracking-tight leading-[1.02]">
               {title}
             </h1>
 
@@ -100,7 +99,8 @@ export function ProjectDetailClient({ project }: { project: ProjectDTO }) {
       {project.coverImage && (
         <section className="py-8 md:py-12">
           <div className="container">
-            <div className="relative rounded-lg overflow-hidden border border-navy-700/50">
+            <div className="relative rounded-2xl overflow-hidden border border-white/10 shadow-[0_30px_80px_-40px_rgba(0,0,0,0.9)]">
+              <div className="absolute -inset-4 bg-accent-cyan/5 blur-2xl -z-10" />
               <img src={project.coverImage} alt={title} className="w-full object-contain" />
             </div>
           </div>
@@ -110,7 +110,7 @@ export function ProjectDetailClient({ project }: { project: ProjectDTO }) {
       {longDesc && (
         <section className="py-12 md:py-16">
           <div className="container max-w-3xl">
-            <div className="prose prose-lg max-w-none">
+            <div className="prose prose-invert prose-lg max-w-none prose-headings:font-display prose-headings:tracking-tight prose-a:text-accent-cyan prose-a:no-underline hover:prose-a:underline prose-strong:text-text-heading prose-code:text-accent-cyan prose-code:before:content-none prose-code:after:content-none prose-img:rounded-xl prose-img:border prose-img:border-white/10">
               <ReactMarkdown>{longDesc}</ReactMarkdown>
             </div>
           </div>
@@ -118,19 +118,22 @@ export function ProjectDetailClient({ project }: { project: ProjectDTO }) {
       )}
 
       {project.images.length > 0 && (
-        <section className="py-12 md:py-16 border-t border-navy-700/30">
+        <section className="py-12 md:py-16 border-t border-white/5">
           <div className="container">
-            <h2 className="text-2xl font-bold mb-8 text-text-heading">
+            <h2 className="font-display text-2xl md:text-3xl font-bold mb-8 text-text-heading tracking-tight">
               <span className="text-accent-cyan font-mono font-normal text-lg mr-2">//</span>
               {t("gallery")}
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {project.images.map((image, index) => (
-                <div key={index} className="relative rounded-lg overflow-hidden border border-navy-700/50 group">
+                <div
+                  key={index}
+                  className="relative rounded-xl overflow-hidden border border-white/10 group transition-all duration-300 hover:border-accent-cyan/30 hover:shadow-[0_0_30px_-8px_var(--glow-cyan)]"
+                >
                   <img
                     src={image}
                     alt={`${title} - ${index + 1}`}
-                    className="w-full object-contain transition-transform duration-500 group-hover:scale-105"
+                    className="w-full object-contain transition-transform duration-500 group-hover:scale-[1.06]"
                   />
                 </div>
               ))}

@@ -11,9 +11,9 @@ export function Card({ children, className, hoverable = false }: CardProps) {
   return (
     <div
       className={clsx(
-        "rounded-lg bg-navy-800 border border-navy-700/50",
+        "rounded-xl bg-navy-800/60 border border-white/5",
         hoverable &&
-          "hover:border-accent-cyan/30 hover:shadow-[0_0_30px_rgba(100,255,218,0.07)] hover:scale-[1.01] transition-all duration-300 cursor-pointer",
+          "hover:border-accent-cyan/30 hover:shadow-[0_0_30px_rgba(100,255,218,0.07)] hover:-translate-y-1 transition-all duration-300 cursor-pointer",
         className
       )}
     >

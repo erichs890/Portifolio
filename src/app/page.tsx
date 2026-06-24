@@ -32,13 +32,13 @@ export default async function Home() {
     <div className="min-h-screen">
       <HeroSection stats={stats} />
 
-      <section className="py-20 md:py-28 border-t border-slate-800">
+      <section className="py-20 md:py-28 border-t border-white/5">
         <div className="container">
           <SkillsSection />
         </div>
       </section>
 
-      <section id="projects" className="py-20 md:py-28 border-t border-slate-800">
+      <section id="projects" className="scroll-mt-20 py-20 md:py-28 border-t border-white/5">
         <div className="container">
           <ProjectsSection />
         </div>

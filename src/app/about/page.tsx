@@ -27,9 +27,8 @@ export default function AboutPage() {
 
   return (
     <div className="min-h-screen">
-      <section className="py-16 md:py-24 relative">
-        <div className="absolute inset-0 bg-grid-pattern opacity-20" />
-        <div className="absolute inset-0 bg-gradient-to-b from-navy-950 to-navy-950/95" />
+      <section className="pt-24 pb-20 md:pt-28 md:pb-28 relative">
+        <div className="absolute top-0 -left-32 w-96 h-96 bg-accent-cyan/10 rounded-full blur-[120px] -z-10" />
 
         <div className="container relative max-w-3xl">
           <Link
@@ -43,37 +42,41 @@ export default function AboutPage() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           >
-            <h1 className="text-3xl md:text-4xl font-bold text-text-heading mb-2">
-              <span className="text-accent-cyan font-mono font-normal text-xl mr-2">//</span>
+            <p className="eyebrow mb-3">// whoami</p>
+            <h1 className="font-display text-4xl md:text-5xl font-bold text-text-heading mb-3 tracking-tight">
               {t("aboutTitle")}
             </h1>
-            <div className="h-px bg-gradient-to-r from-navy-700 to-transparent mb-10" />
+            <div className="h-px bg-gradient-to-r from-accent-cyan/30 via-navy-700 to-transparent mb-12" />
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.15 }}
-            className="flex flex-col md:flex-row gap-8 items-start"
+            transition={{ duration: 0.6, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+            className="flex flex-col md:flex-row gap-10 items-start"
           >
             {/* Photo */}
-            <div className="flex-shrink-0">
-              <div className="relative">
-                <div className="w-36 h-36 md:w-44 md:h-44 rounded-lg overflow-hidden border border-navy-700 ring-2 ring-accent-cyan/10">
+            <div className="flex-shrink-0 mx-auto md:mx-0">
+              <div className="group relative">
+                <div className="w-40 h-40 md:w-48 md:h-48 rounded-2xl overflow-hidden border border-white/10 ring-1 ring-accent-cyan/10">
                   <img
                     src="/images/foto.jpg"
                     alt="Erich Lima Schlaepfer"
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                 </div>
-                <div className="absolute -inset-2 rounded-lg bg-accent-cyan/5 blur-xl -z-10" />
+                <div className="absolute -inset-3 rounded-2xl bg-accent-cyan/10 blur-2xl -z-10" />
+                <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 chip !rounded-full whitespace-nowrap">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                  Fortaleza, BR
+                </div>
               </div>
             </div>
 
             {/* Text */}
-            <div className="space-y-4 text-text-secondary leading-relaxed">
+            <div className="space-y-5 text-text-secondary leading-relaxed text-[15px] md:text-base">
               {text.split("\n\n").map((paragraph, i) => (
                 <p key={i} dangerouslySetInnerHTML={{
                   __html: paragraph.replace(

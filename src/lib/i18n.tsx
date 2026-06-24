@@ -12,6 +12,10 @@ const translations = {
     heroDescription:
       "Full Stack Developer & Data Analyst specialized in transforming raw data into scalable applications and business insights. From database to interface.",
     heroCta: "See projects",
+    heroContact: "Get in touch",
+    heroAvailable: "Available for work",
+    heroRole: "Full Stack Developer · Data Analyst",
+    scrollHint: "scroll",
     // Stats
     statProjects: "Projects",
     statFinished: "Finished",
@@ -39,9 +43,14 @@ const translations = {
     featured: "featured",
     // Nav
     navAbout: "About",
+    navProjects: "Projects",
     navAdmin: ".admin()",
     // Footer
     footerBuilt: "built with Next.js & TypeScript",
+    footerTagline: "Let's build something great together.",
+    footerContact: "Get in touch",
+    footerRights: "All rights reserved",
+    backToTop: "Back to top",
     // About
     aboutTitle: "About Me",
     // Detail page
@@ -71,6 +80,10 @@ const translations = {
     heroDescription:
       "Desenvolvedor Full Stack & Analista de Dados especializado em transformar dados brutos em aplicações escaláveis e insights de negócio. Do banco de dados à interface.",
     heroCta: "Ver projetos",
+    heroContact: "Entrar em contato",
+    heroAvailable: "Disponível para projetos",
+    heroRole: "Desenvolvedor Full Stack · Analista de Dados",
+    scrollHint: "rolar",
     statProjects: "Projetos",
     statFinished: "Finalizados",
     statInDev: "Em Desenvolvimento",
@@ -93,8 +106,13 @@ const translations = {
     coCreator: "Co-Criador",
     featured: "destaque",
     navAbout: "Sobre",
+    navProjects: "Projetos",
     navAdmin: ".admin()",
     footerBuilt: "feito com Next.js & TypeScript",
+    footerTagline: "Vamos construir algo incrível juntos.",
+    footerContact: "Fale comigo",
+    footerRights: "Todos os direitos reservados",
+    backToTop: "Voltar ao topo",
     aboutTitle: "Sobre Mim",
     backToProjects: "cd ../projetos",
     repository: "Repositório",
