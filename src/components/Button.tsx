@@ -24,7 +24,7 @@ export function Button({
     primary:
       "bg-transparent border border-accent-cyan text-accent-cyan hover:bg-accent-cyan/10 hover:shadow-[0_8px_30px_-10px_var(--glow-cyan)] font-mono",
     secondary:
-      "bg-navy-800/60 hover:bg-navy-700/60 text-text-primary border border-white/5 hover:border-white/15",
+      "bg-navy-800/60 hover:bg-navy-700/60 text-text-primary border border-line hover:border-line-strong",
     danger:
       "bg-rose-600/10 hover:bg-rose-600/20 text-rose-400 border border-rose-500/20",
   };

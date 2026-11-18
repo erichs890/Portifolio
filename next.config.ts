@@ -2,6 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   reactCompiler: true,
+  poweredByHeader: false,
   typescript: {
     ignoreBuildErrors: false,
   },
@@ -16,7 +17,7 @@ const nextConfig: NextConfig = {
         hostname: "picsum.photos",
       },
     ],
-    unoptimized: false,
+    formats: ["image/avif", "image/webp"],
   },
   headers: async () => {
     return [

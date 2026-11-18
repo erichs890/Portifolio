@@ -32,6 +32,14 @@ model Project {
   descriptionEn String?
   longDescription String?
   longDescriptionEn String?
+  // Showcase fields: short card copy, filters and the featured layout
+  summary       String?
+  summaryEn     String?
+  highlights    String[]   @default([])
+  highlightsEn  String[]   @default([])
+  categories    String[]   @default([])
+  featuredStack String[]   @default([])
+  projectDate   DateTime?
   coverImage    String?
   images        String[]   @default([])
   repositoryUrl String?

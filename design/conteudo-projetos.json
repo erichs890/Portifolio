@@ -1,0 +1,278 @@
+{
+  "_nota": "Conteúdo dos campos novos, já gravado no banco. Daqui em diante a fonte é o banco (edite pelo admin).",
+  "projetos": [
+    {
+      "slug": "the-build-code",
+      "featured": true,
+      "categories": [
+        "SECURITY",
+        "WEB"
+      ],
+      "featuredStack": [
+        "Astro",
+        "React",
+        "Supabase",
+        "Python",
+        "Redis"
+      ],
+      "summary": "SaaS de cibersegurança e qualidade de software: pentest automatizado e auditoria de QA em 9 domínios num só painel.",
+      "summaryEn": "Cybersecurity and software-quality SaaS: automated pentesting and a 9-domain QA audit in a single dashboard.",
+      "highlights": [
+        "Pentest com 5 níveis de profundidade e mais de 150 checks de vulnerabilidade",
+        "Quatro agentes de IA analisam o alvo sob ângulos diferentes",
+        "Validação de 24 pontos da LGPD (Lei 13.709/2018)"
+      ],
+      "highlightsEn": [
+        "Pentesting with 5 depth levels and more than 150 vulnerability checks",
+        "Four AI agents analyse the target from different angles",
+        "Validates 24 points of Brazil's data-protection law (LGPD)"
+      ]
+    },
+    {
+      "slug": "medschedule-sistema-de-agenda-medica",
+      "featured": true,
+      "categories": [
+        "WEB"
+      ],
+      "featuredStack": [
+        "Next.js",
+        "TypeScript",
+        "Supabase",
+        "PostgreSQL",
+        "Playwright"
+      ],
+      "summary": "SaaS de agendamento para clínicas: consultas, pacientes, prontuário e relatórios em tempo real.",
+      "summaryEn": "Scheduling SaaS for clinics: appointments, patients, medical records and reports in real time.",
+      "highlights": [
+        "Agenda semanal com arrastar e soltar e sincronização em tempo real",
+        "Assistente com IA (Google Gemini) que organiza anotações clínicas",
+        "Testes unitários e ponta a ponta rodando em integração contínua"
+      ],
+      "highlightsEn": [
+        "Weekly calendar with drag and drop and real-time sync between users",
+        "AI assistant (Google Gemini) that organises clinical notes",
+        "Unit and end-to-end tests running in continuous integration"
+      ]
+    },
+    {
+      "slug": "openrct",
+      "featured": true,
+      "categories": [
+        "SYSTEMS"
+      ],
+      "featuredStack": [
+        "C",
+        "x86 Assembly",
+        "Python",
+        "Ghidra",
+        "Win32 API"
+      ],
+      "summary": "Reconstrução em C, função por função, do RollerCoaster Tycoon (1999), rodando dentro do jogo original.",
+      "summaryEn": "A function-by-function C reconstruction of RollerCoaster Tycoon (1999), running inside the original game.",
+      "highlights": [
+        "42 funções verificadas na versão 0.1",
+        "Testes diferenciais comparam saídas, registradores e 3,8 MB de memória com o original",
+        "Os próprios testes são validados com testes de mutação"
+      ],
+      "highlightsEn": [
+        "42 verified functions in version 0.1",
+        "Differential tests compare outputs, registers and 3.8 MB of memory against the original",
+        "The tests themselves are validated with mutation testing"
+      ]
+    },
+    {
+      "slug": "bazar-do-renascer",
+      "featured": true,
+      "categories": [
+        "WEB"
+      ],
+      "featuredStack": [
+        "React",
+        "TypeScript",
+        "Supabase",
+        "PostgreSQL",
+        "Mercado Pago"
+      ],
+      "summary": "PWA de bazar beneficente com pagamento real pelo Mercado Pago (Pix, cartão e boleto), sem servidor próprio.",
+      "summaryEn": "Charity thrift-shop PWA with real payments through Mercado Pago (Pix, card and boleto) and no server of its own.",
+      "highlights": [
+        "Toda regra de segurança vive no PostgreSQL: Row Level Security, RPCs atômicas e triggers",
+        "Só o webhook com assinatura HMAC verificada marca um pedido como pago",
+        "100 no Lighthouse em Acessibilidade, Boas Práticas e SEO"
+      ],
+      "highlightsEn": [
+        "Every security rule lives in PostgreSQL: Row Level Security, atomic RPCs and triggers",
+        "Only the webhook with a verified HMAC signature can mark an order as paid",
+        "Lighthouse 100 in Accessibility, Best Practices and SEO"
+      ]
+    },
+    {
+      "slug": "acv-auto-curriculum-vitae",
+      "featured": true,
+      "categories": [
+        "AI",
+        "WEB"
+      ],
+      "featuredStack": [
+        "TypeScript",
+        "Playwright",
+        "Node.js",
+        "React",
+        "Gemini API"
+      ],
+      "summary": "App local que encontra vagas compatíveis, recria o currículo para cada uma e se candidata sozinho com Playwright.",
+      "summaryEn": "Local app that finds matching jobs, rewrites the résumé for each one and applies on its own with Playwright.",
+      "highlights": [
+        "Pontuação de compatibilidade por IA (Gemini ou Claude), com o motivo explicado",
+        "Currículo otimizado para ATS a cada vaga, sem inventar informação",
+        "Descobre empresas no InHire pelo índice público do Common Crawl"
+      ],
+      "highlightsEn": [
+        "AI match scoring (Gemini or Claude) with the reason explained",
+        "An ATS-optimised résumé for each job, without inventing anything",
+        "Discovers companies on InHire through the public Common Crawl index"
+      ]
+    },
+    {
+      "slug": "cacalead",
+      "featured": false,
+      "categories": [
+        "DATA",
+        "WEB"
+      ],
+      "featuredStack": [
+        "TypeScript",
+        "Node.js",
+        "SQLite",
+        "React",
+        "ETL"
+      ],
+      "summary": "Prospecção local sobre os dados abertos de CNPJ da Receita Federal: acha empresas recém-abertas e organiza o contato num mini-CRM.",
+      "summaryEn": "Local prospecting on Brazil's open company registry: finds newly opened businesses and tracks outreach in a mini-CRM.",
+      "highlights": [
+        "Pipeline de ingestão que baixa cerca de 7 GB por mês e retoma sozinho quando a conexão cai",
+        "Cerca de 74 milhões de linhas lidas em streaming, a uns 90 mil por segundo",
+        "Roda inteiro no computador, em SQLite, sem nuvem nem login"
+      ],
+      "highlightsEn": [
+        "Ingestion pipeline that downloads about 7 GB a month and resumes by itself when the connection drops",
+        "About 74 million rows read as a stream, at roughly 90 thousand per second",
+        "Runs entirely on your computer, on SQLite, with no cloud and no login"
+      ]
+    },
+    {
+      "slug": "synth-hand",
+      "featured": false,
+      "categories": [
+        "AI",
+        "WEB"
+      ],
+      "featuredStack": [
+        "React",
+        "MediaPipe",
+        "Web Audio API",
+        "Tailwind CSS",
+        "Vite"
+      ],
+      "summary": "Sintetizador tocado por gestos diante da webcam: uma mão escolhe a nota, a outra o acorde, tudo no navegador.",
+      "summaryEn": "A synthesizer played with hand gestures on a webcam: one hand picks the note, the other the chord, all in the browser.",
+      "highlights": [
+        "Rastreamento das mãos com MediaPipe a cerca de 60 FPS",
+        "16 notas e 8 tipos de acorde em duas roletas radiais",
+        "Síntese com a Web Audio API, sem cliques na troca de nota"
+      ],
+      "highlightsEn": [
+        "Hand tracking with MediaPipe at about 60 FPS",
+        "16 notes and 8 chord types on two radial wheels",
+        "Synthesis with the Web Audio API, with no clicks between notes"
+      ]
+    },
+    {
+      "slug": "verifyai-nome-temporario",
+      "featured": false,
+      "categories": [
+        "AI"
+      ],
+      "featuredStack": [
+        "Python",
+        "FastAPI",
+        "OpenCV",
+        "PyTorch",
+        "React"
+      ],
+      "summary": "Perícia forense de vídeo que detecta conteúdo gerado por IA e deepfakes combinando modelos e processamento de sinais.",
+      "summaryEn": "Video forensics that detects AI-generated content and deepfakes by combining models with signal processing.",
+      "highlights": [
+        "Ensemble de modelos pré-treinados (SigLIP v2 + ViT)",
+        "Mais de 12 métricas de sinal, como fluxo óptico, FFT 2D e ruído de sensor",
+        "Relatório com score por frame e conclusão técnica"
+      ],
+      "highlightsEn": [
+        "Ensemble of pre-trained models (SigLIP v2 + ViT)",
+        "More than 12 signal metrics, such as optical flow, 2D FFT and sensor noise",
+        "Report with per-frame scores and a written technical conclusion"
+      ]
+    },
+    {
+      "slug": "aplicativo-igreja-batista-alvorada",
+      "featured": false,
+      "categories": [
+        "MOBILE"
+      ],
+      "featuredStack": [
+        "React Native",
+        "Expo",
+        "TypeScript",
+        "NativeWind"
+      ],
+      "summary": "App mobile da Igreja Batista Alvorada que reúne informações da igreja, materiais de estudo (EBD) e leitura bíblica.",
+      "summaryEn": "Mobile app for Igreja Batista Alvorada that brings together church information, study materials and Bible reading.",
+      "highlights": [],
+      "highlightsEn": []
+    },
+    {
+      "slug": "dashboard-de-reputacao-nagem-reclameaqui",
+      "featured": false,
+      "categories": [
+        "DATA"
+      ],
+      "featuredStack": [
+        "React",
+        "JavaScript"
+      ],
+      "summary": "Painel de análise exploratória com dados reais de reclamações do ReclameAqui sobre a rede Nagem.",
+      "summaryEn": "Exploratory-analysis dashboard built on real ReclameAqui complaint data about the retailer Nagem.",
+      "highlights": [],
+      "highlightsEn": []
+    },
+    {
+      "slug": "cyberdyne",
+      "featured": false,
+      "categories": [
+        "SECURITY"
+      ],
+      "featuredStack": [
+        "Python",
+        "Go"
+      ],
+      "summary": "Script de segurança ofensiva que varre aplicações web atrás de XSS, SQL Injection, LFI, IDOR e SSRF.",
+      "summaryEn": "Offensive-security script that scans web apps for XSS, SQL injection, LFI, IDOR and SSRF.",
+      "highlights": [],
+      "highlightsEn": []
+    },
+    {
+      "slug": "tonalidade-de-partituras",
+      "featured": false,
+      "categories": [
+        "WEB"
+      ],
+      "featuredStack": [
+        "React"
+      ],
+      "summary": "Aplicação web que ajuda músicos a identificar e entender a tonalidade de uma partitura.",
+      "summaryEn": "Web app that helps musicians identify and understand the key of a piece of sheet music.",
+      "highlights": [],
+      "highlightsEn": []
+    }
+  ]
+}

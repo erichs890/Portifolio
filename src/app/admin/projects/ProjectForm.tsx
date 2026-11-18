@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { ProjectDTO, CreateProjectDTO } from "@/types";
+import { ProjectDTO, CreateProjectDTO, PROJECT_CATEGORIES, type ProjectCategory } from "@/types";
 import { Input, Textarea, Select, Button, Modal } from "@/components";
 import toast from "react-hot-toast";
 
@@ -19,6 +19,11 @@ export function ProjectForm({ project, isLoading: externalIsLoading }: ProjectFo
   const [techInput, setTechInput] = useState<string>(
     project?.technologies.map((t) => t.name).join(", ") || ""
   );
+  // Showcase fields are edited as plain text and split on save: one highlight per line, stack by comma.
+  const [highlightsText, setHighlightsText] = useState((project?.highlights ?? []).join("\n"));
+  const [highlightsEnText, setHighlightsEnText] = useState((project?.highlightsEn ?? []).join("\n"));
+  const [orderText, setOrderText] = useState(String(project?.order ?? 0));
+  const [stackText, setStackText] = useState((project?.featuredStack ?? []).join(", "));
   const [uploadingImage, setUploadingImage] = useState(false);
   const [showImageModal, setShowImageModal] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
@@ -30,7 +35,12 @@ export function ProjectForm({ project, isLoading: externalIsLoading }: ProjectFo
     descriptionEn: project?.descriptionEn || "",
     longDescription: project?.longDescription || "",
     longDescriptionEn: project?.longDescriptionEn || "",
+    summary: project?.summary || "",
+    summaryEn: project?.summaryEn || "",
+    categories: project?.categories ?? [],
+    projectDate: project?.projectDate ? new Date(project.projectDate).toISOString().slice(0, 10) : "",
     coverImage: project?.coverImage || "",
+    images: project?.images ?? [],
     repositoryUrl: project?.repositoryUrl || "",
     liveUrl: project?.liveUrl || "",
     status: project?.status || "IN_DEVELOPMENT",
@@ -73,6 +83,27 @@ export function ProjectForm({ project, isLoading: externalIsLoading }: ProjectFo
     } catch (error) {
       const message = error instanceof Error ? error.message : "Erro ao fazer upload da imagem";
       toast.error(message);
+    } finally {
+      setUploadingImage(false);
+    }
+  };
+
+  /** Uploads each picked file and appends it to the project gallery. */
+  const uploadGallery = async (files: FileList | null) => {
+    if (!files?.length) return;
+    setUploadingImage(true);
+    try {
+      for (const file of Array.from(files)) {
+        const body = new FormData();
+        body.append("file", file);
+        const response = await fetch("/api/upload", { method: "POST", body });
+        const data = await response.json();
+        if (!response.ok || !data.data?.url) throw new Error(data.error || "Erro no upload");
+        setFormData((prev) => ({ ...prev, images: [...(prev.images ?? []), data.data.url] }));
+      }
+      toast.success("Galeria atualizada. Salve o projeto para gravar.");
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : "Erro ao enviar imagem");
     } finally {
       setUploadingImage(false);
     }
@@ -124,6 +155,21 @@ export function ProjectForm({ project, isLoading: externalIsLoading }: ProjectFo
     return ids;
   }
 
+  const splitList = (text: string, separator: string, max: number) =>
+    text
+      .split(separator)
+      .map((item) => item.trim())
+      .filter(Boolean)
+      .slice(0, max);
+
+  const toggleCategory = (category: ProjectCategory) => {
+    const current = formData.categories ?? [];
+    setFormData({
+      ...formData,
+      categories: current.includes(category) ? current.filter((c) => c !== category) : [...current, category],
+    });
+  };
+
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setIsLoading(true);
@@ -145,6 +191,11 @@ export function ProjectForm({ project, isLoading: externalIsLoading }: ProjectFo
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...formData,
+          projectDate: formData.projectDate || null,
+          order: Number.parseInt(orderText, 10) || 0,
+          highlights: splitList(highlightsText, "\n", 3),
+          highlightsEn: splitList(highlightsEnText, "\n", 3),
+          featuredStack: splitList(stackText, ",", 5),
           technologies: techIds,
         }),
       });
@@ -236,6 +287,79 @@ export function ProjectForm({ project, isLoading: externalIsLoading }: ProjectFo
         </div>
       </div>
 
+      {/* Vitrine: o que aparece nos cards da home */}
+      <div className="bg-navy-800 border border-slate-700/50 rounded-lg shadow p-6">
+        <h2 className="text-xl font-bold mb-2 text-slate-50">Vitrine</h2>
+        <p className="text-sm text-text-secondary mb-6">
+          Texto dos cards da home. Sem resumo, o card usa a primeira frase da descrição curta.
+        </p>
+        <div className="space-y-4">
+          <Textarea
+            label="Resumo do card (PT, até 220 caracteres)"
+            value={formData.summary}
+            maxLength={220}
+            onChange={(e) => setFormData({ ...formData, summary: e.target.value })}
+            containerClassName="space-y-2"
+          />
+          <Textarea
+            label="Card summary (EN, up to 220 characters)"
+            value={formData.summaryEn}
+            maxLength={220}
+            onChange={(e) => setFormData({ ...formData, summaryEn: e.target.value })}
+            containerClassName="space-y-2"
+          />
+          <Textarea
+            label="Destaques técnicos (PT, um por linha, até 3)"
+            value={highlightsText}
+            onChange={(e) => setHighlightsText(e.target.value)}
+            containerClassName="space-y-2"
+          />
+          <Textarea
+            label="Technical highlights (EN, one per line, up to 3)"
+            value={highlightsEnText}
+            onChange={(e) => setHighlightsEnText(e.target.value)}
+            containerClassName="space-y-2"
+          />
+          <Input
+            label="Stack do card (até 5, separadas por vírgula)"
+            value={stackText}
+            onChange={(e) => setStackText(e.target.value)}
+            placeholder="Next.js, TypeScript, Supabase"
+            containerClassName="space-y-2"
+          />
+          <fieldset>
+            <legend className="block text-sm font-medium text-text-primary mb-2">Categorias</legend>
+            <div className="flex flex-wrap gap-x-5 gap-y-2">
+              {PROJECT_CATEGORIES.map((category) => (
+                <label key={category} className="inline-flex items-center gap-2 min-h-11 text-sm text-text-primary cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={(formData.categories ?? []).includes(category)}
+                    onChange={() => toggleCategory(category)}
+                  />
+                  {category}
+                </label>
+              ))}
+            </div>
+          </fieldset>
+          <Input
+            label="Ordem (menor aparece primeiro; iguais ficam do mais novo ao mais antigo)"
+            type="number"
+            step={1}
+            value={orderText}
+            onChange={(e) => setOrderText(e.target.value)}
+            containerClassName="space-y-2"
+          />
+          <Input
+            label="Data do projeto (vazio = data de cadastro)"
+            type="date"
+            value={formData.projectDate ?? ""}
+            onChange={(e) => setFormData({ ...formData, projectDate: e.target.value })}
+            containerClassName="space-y-2"
+          />
+        </div>
+      </div>
+
       {/* URLs e Links */}
       <div className="bg-navy-800 border border-slate-700/50 rounded-lg shadow p-6">
         <h2 className="text-xl font-bold mb-6 text-slate-50">
@@ -257,6 +381,44 @@ export function ProjectForm({ project, isLoading: externalIsLoading }: ProjectFo
             containerClassName="space-y-2"
           />
         </div>
+      </div>
+
+      {/* Galeria */}
+      <div className="bg-navy-800 border border-slate-700/50 rounded-lg shadow p-6">
+        <h2 className="text-xl font-bold mb-2 text-slate-50">Galeria</h2>
+        <p className="text-sm text-text-secondary mb-6">
+          Capturas extras da página do projeto (até 12). Prefira imagens em 16:10.
+        </p>
+        {(formData.images ?? []).length > 0 && (
+          <ul className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-4">
+            {(formData.images ?? []).map((src, index) => (
+              <li key={src} className="relative rounded-lg overflow-hidden border border-line">
+                <img src={src} alt={`Imagem ${index + 1} da galeria`} className="w-full aspect-[16/10] object-cover" />
+                <button
+                  type="button"
+                  onClick={() => setFormData({ ...formData, images: (formData.images ?? []).filter((item) => item !== src) })}
+                  className="absolute top-1.5 right-1.5 min-h-11 px-3 rounded-md bg-black/70 text-white text-xs font-medium cursor-pointer"
+                >
+                  Remover
+                </button>
+              </li>
+            ))}
+          </ul>
+        )}
+        <label className="inline-flex items-center min-h-11 px-4 rounded-lg border border-line-strong text-sm font-medium text-text-heading cursor-pointer">
+          {uploadingImage ? "Enviando..." : "Adicionar imagens"}
+          <input
+            type="file"
+            accept="image/*"
+            multiple
+            className="sr-only"
+            disabled={uploadingImage || (formData.images ?? []).length >= 12}
+            onChange={(e) => {
+              uploadGallery(e.target.files);
+              e.target.value = "";
+            }}
+          />
+        </label>
       </div>
 
       {/* Imagem e Status */}

@@ -1,3 +1,4 @@
+import { refreshPublishedProjects } from "@/lib/publicProjects";
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { projectService } from "@/services/project.service";
@@ -42,6 +43,8 @@ export async function POST(request: NextRequest) {
     const validated = CreateProjectSchema.parse(body);
 
     const project = await projectService.createProject(validated);
+
+    refreshPublishedProjects();
 
     return NextResponse.json(
       {

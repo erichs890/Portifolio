@@ -1,71 +1,58 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Code2, Layers, Server, Database, BarChart3, Wrench, type LucideIcon } from "lucide-react";
-import { SectionHeader } from "@/components";
+import { Kw, QueryHeading } from "@/components/QueryHeading";
 import { useI18n } from "@/lib/i18n";
+import { STACK_GROUPS } from "@/lib/stack";
 
-interface Category {
-  title: string;
-  color: string;
-  icon: LucideIcon;
-  techs: string[];
-}
-
-const categories: Category[] = [
-  { title: "Core Dev", color: "#64ffda", icon: Code2, techs: ["Python", "JavaScript", "TypeScript", "HTML", "CSS"] },
-  { title: "Frontend", color: "#60a5fa", icon: Layers, techs: ["React", "React Native", "Next.js", "Tailwind CSS"] },
-  { title: "Backend & APIs", color: "#10B981", icon: Server, techs: ["Node.js", "REST APIs", "Prisma ORM"] },
-  { title: "Database / Supabase", color: "#8B5CF6", icon: Database, techs: ["PostgreSQL", "SQL", "Supabase", "Row Level Security"] },
-  { title: "Data & Analytics", color: "#F59E0B", icon: BarChart3, techs: ["Pandas", "Data Viz", "ETL", "KPIs & Reports"] },
-  { title: "DevOps & Tools", color: "#F43F5E", icon: Wrench, techs: ["Git", "Vercel", "Docker", "CI/CD"] },
-];
-
-const EASE = [0.16, 1, 0.3, 1] as const;
-
-export function SkillsSection() {
+/** Technologies by domain, each with its logo and how many projects on this site use it. */
+export function SkillsSection({ usage }: { usage: Record<string, number> | null }) {
   const { t } = useI18n();
 
   return (
     <>
-      <SectionHeader index="01" title={t("sectionTechStack")} subtitle={t("sectionTechStackSub")} />
+      <QueryHeading
+        sql={
+          <>
+            <Kw>SELECT</Kw> name, <Kw>COUNT</Kw>(project_id) <Kw>FROM</Kw> technologies <Kw>GROUP BY</Kw> name;
+          </>
+        }
+        title={t("sectionTechStack")}
+      >
+        <p className="mt-4 max-w-[60ch] text-body">{usage ? t("stackLead") : t("stackLeadNoData")}</p>
+      </QueryHeading>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {categories.map((cat, index) => {
-          const Icon = cat.icon;
-          return (
-            <motion.div
-              key={cat.title}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.5, delay: index * 0.07, ease: EASE }}
-              className="group surface-card border-gradient p-5"
-            >
-              <div className="flex items-center gap-3 mb-4">
-                <span
-                  className="grid place-items-center w-9 h-9 rounded-lg transition-transform duration-300 group-hover:scale-110"
-                  style={{ backgroundColor: `${cat.color}14`, border: `1px solid ${cat.color}2e` }}
-                >
-                  <Icon size={17} style={{ color: cat.color }} />
-                </span>
-                <h3
-                  className="text-sm font-semibold font-mono uppercase tracking-wider"
-                  style={{ color: cat.color }}
-                >
-                  {cat.title}
-                </h3>
-              </div>
-              <div className="flex flex-wrap gap-2">
-                {cat.techs.map((tech) => (
-                  <span key={tech} className="chip">
-                    {tech}
-                  </span>
-                ))}
-              </div>
-            </motion.div>
-          );
-        })}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        {STACK_GROUPS.map((group) => (
+          <section key={group.id} aria-labelledby={`stack-${group.id}`} className="rounded-2xl border border-line bg-surface-1 p-5">
+            <h3 id={`stack-${group.id}`} className="!text-base mb-3 font-mono !font-medium !tracking-normal text-muted" style={{ fontStretch: "100%" }}>
+              {t(group.label)}
+            </h3>
+            <ul>
+              {group.items.map((item) => {
+                const count = usage?.[item.name] ?? 0;
+                return (
+                  <li key={item.name} className="flex items-center gap-3 min-h-11 border-t border-line first:border-t-0">
+                    <span className="grid place-items-center w-6 h-6 shrink-0 text-heading" aria-hidden="true">
+                      {item.icon ? (
+                        <svg viewBox="0 0 24 24" className="w-5 h-5" fill="currentColor">
+                          <path d={item.icon} />
+                        </svg>
+                      ) : (
+                        <span className="w-1.5 h-1.5 rounded-full bg-line-strong" />
+                      )}
+                    </span>
+                    <span className="flex-1 text-[15px] text-heading">{item.name}</span>
+                    {count > 0 && (
+                      <span className="font-mono text-xs text-muted tabular-nums">
+                        {count} {t(count === 1 ? "countProject" : "countProjects")}
+                      </span>
+                    )}
+                  </li>
+                );
+              })}
+            </ul>
+          </section>
+        ))}
       </div>
     </>
   );

@@ -1,14 +1,6 @@
 export { Button } from "./Button";
-export { Card, CardImage, CardBody, CardFooter } from "./Card";
-export { Badge, StatusBadge } from "./Badge";
 export { Input, Textarea, Select } from "./Form";
 export { Modal } from "./Modal";
 export { Skeleton, LoadingSpinner, LoadingScreen } from "./Loading";
-export { Header } from "./Header";
 export { Footer } from "./Footer";
-export { StatCard } from "./StatCard";
-export { SparklineChart } from "./SparklineChart";
-export { TechBadge } from "./TechBadge";
-export { GlowCard } from "./GlowCard";
 export { AnimatedCounter } from "./AnimatedCounter";
-export { SectionHeader } from "./SectionHeader";

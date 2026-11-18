@@ -1,3 +1,4 @@
+import { refreshPublishedProjects } from "@/lib/publicProjects";
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { projectService } from "@/services/project.service";
@@ -41,6 +42,8 @@ export async function PUT(
 
     const project = await projectService.updateProject(id, validated);
 
+    refreshPublishedProjects();
+
     return NextResponse.json({
       success: true,
       data: project,
@@ -71,6 +74,8 @@ export async function DELETE(
     }
 
     await projectService.deleteProject(id);
+
+    refreshPublishedProjects();
 
     return NextResponse.json({
       success: true,

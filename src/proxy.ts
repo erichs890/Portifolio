@@ -14,7 +14,7 @@ export default withAuth(
     }
 
     // Proteger rotas de API administrativas
-    if (pathname.startsWith("/api/admin")) {
+    if (pathname.startsWith("/api/admin") || pathname.startsWith("/api/upload")) {
       if (token?.role !== "ADMIN") {
         return NextResponse.json({ error: "Forbidden" }, { status: 403 });
       }
@@ -33,5 +33,5 @@ export default withAuth(
 );
 
 export const config = {
-  matcher: ["/admin/:path*", "/api/admin/:path*"],
+  matcher: ["/admin/:path*", "/api/admin/:path*", "/api/upload"],
 };

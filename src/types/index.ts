@@ -4,6 +4,9 @@ export type ProjectStatus = "IN_DEVELOPMENT" | "IN_PRODUCTION" | "FINISHED";
 
 export type ProjectRole = "CREATOR" | "CO_CREATOR" | "COLLABORATOR";
 
+export const PROJECT_CATEGORIES = ["WEB", "MOBILE", "DATA", "AI", "SECURITY", "SYSTEMS"] as const;
+export type ProjectCategory = (typeof PROJECT_CATEGORIES)[number];
+
 export interface UserDTO {
   id: string;
   email: string;
@@ -39,6 +42,17 @@ export interface ProjectDTO {
   descriptionEn: string | null;
   longDescription: string | null;
   longDescriptionEn: string | null;
+  /** One or two lines that fit a card without truncation. */
+  summary: string | null;
+  summaryEn: string | null;
+  /** Up to three technical highlights, shown on featured projects. */
+  highlights: string[];
+  highlightsEn: string[];
+  categories: ProjectCategory[];
+  /** The four or five technologies worth showing on a card; the full list stays on the project page. */
+  featuredStack: string[];
+  /** When the project happened; falls back to createdAt (the day the record was added). */
+  projectDate: Date | null;
   coverImage: string | null;
   images: string[];
   repositoryUrl: string | null;
@@ -62,6 +76,14 @@ export interface CreateProjectDTO {
   descriptionEn?: string;
   longDescription?: string;
   longDescriptionEn?: string;
+  summary?: string;
+  summaryEn?: string;
+  highlights?: string[];
+  highlightsEn?: string[];
+  categories?: ProjectCategory[];
+  featuredStack?: string[];
+  projectDate?: string | null;
+  order?: number;
   coverImage?: string;
   images?: string[];
   repositoryUrl?: string;
@@ -80,6 +102,13 @@ export interface UpdateProjectDTO {
   descriptionEn?: string;
   longDescription?: string;
   longDescriptionEn?: string;
+  summary?: string;
+  summaryEn?: string;
+  highlights?: string[];
+  highlightsEn?: string[];
+  categories?: ProjectCategory[];
+  featuredStack?: string[];
+  projectDate?: string | null;
   coverImage?: string;
   images?: string[];
   repositoryUrl?: string;

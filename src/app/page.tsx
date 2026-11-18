@@ -1,46 +1,40 @@
-import { Metadata } from "next";
+import { DataSection } from "./components/data/DataSection";
 import { HeroSection } from "./components/HeroSection";
+import { ProofStrip } from "./components/ProofStrip";
 import { SkillsSection } from "./components/SkillsSection";
 import { ProjectsSection } from "./components/ProjectsSection";
-import { projectService } from "@/services/project.service";
-
-export const metadata: Metadata = {
-  title: "Erich Lima Schlaepfer | Full Stack Developer & Data Analyst",
-  description:
-    "Portfólio de Erich Lima Schlaepfer — Full Stack Developer especializado em análise de dados e sistemas robustos.",
-};
-
-export const dynamic = "force-dynamic";
+import { toCardData, toPlaygroundProject } from "@/lib/projects";
+import { techUsage } from "@/lib/stack";
+import { getPublishedProjects } from "@/lib/publicProjects";
 
 export default async function Home() {
-  let stats = { totalProjects: 0, totalFinished: 0, inDevelopment: 0, inProduction: 0 };
-
-  try {
-    const result = await projectService.getAllProjects(1, 100);
-    const projects = result.data;
-    stats = {
-      totalProjects: projects.length,
-      totalFinished: projects.filter((p) => p.status === "FINISHED").length,
-      inDevelopment: projects.filter((p) => p.status === "IN_DEVELOPMENT").length,
-      inProduction: projects.filter((p) => p.status === "IN_PRODUCTION").length,
-    };
-  } catch {
-    // Stats will remain at 0
-  }
+  // One cached query feeds the hero counters, the SQL terminal, the cards and the charts.
+  const projects = await getPublishedProjects();
+  const cards = projects?.map(toCardData) ?? null;
 
   return (
     <div className="min-h-screen">
-      <HeroSection stats={stats} />
+      <HeroSection projects={projects?.map(toPlaygroundProject) ?? null} />
 
-      <section className="py-20 md:py-28 border-t border-white/5">
+      {cards && <ProofStrip projects={cards} />}
+
+      <section id="projects" className="scroll-mt-20 py-20 md:py-28 border-t border-line">
         <div className="container">
-          <SkillsSection />
+          <ProjectsSection projects={cards} />
         </div>
       </section>
 
-      <section id="projects" className="scroll-mt-20 py-20 md:py-28 border-t border-white/5">
+      {cards && cards.length > 0 && (
+        <section id="data" className="scroll-mt-20 py-20 md:py-28 border-t border-line">
+          <div className="container">
+            <DataSection projects={cards} />
+          </div>
+        </section>
+      )}
+
+      <section id="stack" className="scroll-mt-20 py-20 md:py-28 border-t border-line">
         <div className="container">
-          <ProjectsSection />
+          <SkillsSection usage={projects ? techUsage(projects) : null} />
         </div>
       </section>
     </div>

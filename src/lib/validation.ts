@@ -17,7 +17,16 @@ export const CreateProjectSchema = z.object({
   descriptionEn: z.string().max(2000).optional().or(z.literal("")),
   longDescription: z.string().max(5000).optional().or(z.literal("")),
   longDescriptionEn: z.string().max(5000).optional().or(z.literal("")),
+  summary: z.string().max(220).optional().or(z.literal("")),
+  summaryEn: z.string().max(220).optional().or(z.literal("")),
+  highlights: z.array(z.string().max(140)).max(3).optional(),
+  highlightsEn: z.array(z.string().max(140)).max(3).optional(),
+  categories: z.array(z.enum(["WEB", "MOBILE", "DATA", "AI", "SECURITY", "SYSTEMS"])).optional(),
+  featuredStack: z.array(z.string().max(40)).max(5).optional(),
+  projectDate: z.string().nullable().optional(),
+  order: z.number().int().optional(),
   coverImage: z.string().optional().or(z.literal("")),
+  images: z.array(z.string().url()).max(12).optional(),
   repositoryUrl: z.string().optional().or(z.literal("")),
   liveUrl: z.string().optional().or(z.literal("")),
   status: z.enum(["IN_DEVELOPMENT", "IN_PRODUCTION", "FINISHED"]).optional(),
@@ -29,9 +38,7 @@ export const CreateProjectSchema = z.object({
 
 export type CreateProjectInput = z.infer<typeof CreateProjectSchema>;
 
-export const UpdateProjectSchema = CreateProjectSchema.partial().extend({
-  order: z.number().int().optional(),
-});
+export const UpdateProjectSchema = CreateProjectSchema.partial();
 
 export type UpdateProjectInput = z.infer<typeof UpdateProjectSchema>;
 
